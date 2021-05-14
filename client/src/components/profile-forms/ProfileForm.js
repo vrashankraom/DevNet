@@ -23,12 +23,12 @@ const ProfileForm  = ({profile: {profile,loading},createProfile,getCurrentProfil
     const [formData,setFormData] = useState(initialState);
 
     const [displaySocialInputs, toggleSocialInputs] = useState(false);
-    const profileData = { ...initialState };
+    
 
     useEffect(() => {
       if (!profile) getCurrentProfile();
       if (!loading && profile) {
-        
+        const profileData = { ...initialState };
         for (const key in profile) {
           if (key in profileData) profileData[key] = profile[key];
         }
@@ -61,7 +61,7 @@ const ProfileForm  = ({profile: {profile,loading},createProfile,getCurrentProfil
 
     const onSubmit = e => {
         e.preventDefault();
-        createProfile(formData,history,true);
+        createProfile(formData,history,profile?true:false);
       };
     return (
         <div>

@@ -13,6 +13,9 @@ const UserSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    username:{
+        type:String,
+    },
     avatar:{
         type:String
     },

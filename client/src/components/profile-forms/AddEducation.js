@@ -1,4 +1,5 @@
 import React, { Fragment,useState } from 'react';
+import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {addEducation} from '../../actions/profile';
@@ -92,4 +93,4 @@ AddEducation.propTypes = {
 register: PropTypes.func.isRequired,
 }
 
-export default connect(null,{addEducation})(AddEducation)
+export default connect(null,{addEducation})(withRouter(AddEducation))

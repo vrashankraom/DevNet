@@ -139,3 +139,19 @@
     </Link></Fragment>}
     </section>
     </Fragment>
+
+
+
+    /*var emailurl = "https://github.com/"+`${username}`;
+       scrapeImage(emailurl);
+        async function scrapeImage(emailurl){
+          const browser = await puppeteer.launch({headless: false});
+          const page = await browser.newPage();
+          await page.goto(emailurl);
+
+          const [element] = await page.$x('//*[@id="js-pjax-container"]/div[2]/div/div[1]/div/div[2]/div[1]/a/img');
+          const src = await element.getProperty('src');
+          
+          const srcImg = src.jsonValue();
+          console.log(srcImg);
+          */

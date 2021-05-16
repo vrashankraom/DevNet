@@ -10,10 +10,11 @@ const jsdom = require("jsdom");
 const jwt = require('jsonwebtoken');
 
 
+
 router.post('/', [
     check('name', 'Name is required').not().isEmpty(),
     check('email', 'Please include a valid email').isEmail(),
-    check('username', 'Please include your instagram username').not().isEmpty(),
+    //check('username', 'Please include your GitHub username').not().isEmpty(),
     check(
       'password',
       'Please enter a password with 6 or more characters'
@@ -28,7 +29,8 @@ router.post('/', [
     console.log(req.body);
     
 
-    const { name,username, email, password } = req.body;
+    const { username, email, password } = req.body;
+    var {name} = req.body;
     try{
       let user = await User.findOne({ email });
 
@@ -49,37 +51,45 @@ router.post('/', [
           d: 'mm'
         });
        */
-      const url = "https://api.github.com/users/"+`${username}`;
       var avatar;
-      //const myusername=username;
-      //const url ="https://www.instagram.com/"+`${myusername}`+"/?__a=1";
-      UrlExists(url);
-      function UrlExists(url) {
-    var http = new XMLHttpRequest();
-    http.open('HEAD', url, false);
-    http.send();
-    if (http.status == 404){
-    return res
-    .status(400)
-    .json({ errors: [{ msg: 'Instagram User does not exists!' }] });
-    }
-} 
-      const { JSDOM } = jsdom;
-     const { window } = new JSDOM();
-     const { document } = (new JSDOM('')).window;
-      global.document = document;
-      var $ = jQuery = require('jquery')(window);
-      $.getJSON(url,async function(data){
-        console.log(data);
+      if(!username){
+          avatar = "https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png";
+        }
+      else{
+        const url = "https://api.github.com/users/"+`${username}`;
         
-      try{
-        
-      //avatar = await data.graphql.user.profile_pic_url;
-      avatar = await data.avatar_url;
+        UrlExists(url);
+        function UrlExists(url) {
+      var http = new XMLHttpRequest();
+      http.open('HEAD', url, false);
+      http.send();
+      if (http.status == 404){
+      return res
+      .status(400)
+      .json({ errors: [{ msg: 'GitHub User does not exists!' }] });
+      }
+  } 
+  
+        const { JSDOM } = jsdom;
+       const { window } = new JSDOM();
+       const { document } = (new JSDOM('')).window;
+        global.document = document;
+        var $ = jQuery = require('jquery')(window);
+        $.getJSON(url,async function(data){
+          console.log(data);
+          avatar = await data.avatar_url;
+        });
+      }
       
+      try{
+        //const myusername=username;
+      //const url ="https://www.instagram.com/"+`${myusername}`+"/?__a=1";
+      //avatar = await data.graphql.user.profile_pic_url;
+      name=name.toLowerCase();
       user = new User({
         name,
         email,
+        username,
         avatar,
         password
       });
@@ -114,7 +124,7 @@ router.post('/', [
       });
       
      
-});
+
 
 
 module.exports =router;

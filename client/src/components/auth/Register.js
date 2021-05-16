@@ -47,7 +47,7 @@ const Register = ({register,setAlert,isAuthenticated}) => {
           
         </div>
         <div className="form-group">
-          <input type="text" placeholder="Instagram username" name="username" value={username} onChange={e=>onChange(e)} required />
+          <input type="text" placeholder="GitHub username" name="username" value={username} onChange={e=>onChange(e)}/>
         </div>
         <small className="form-text"
             >This site uses GitHub profile image so if you want a profile image, enter GitHub username</small>

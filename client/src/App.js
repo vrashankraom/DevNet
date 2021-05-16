@@ -9,6 +9,8 @@ import PrivateRoute from './components/routing/PrivateRoute'
 import ProfileForm from './components/profile-forms/ProfileForm';
 import AddExperience from './components/profile-forms/AddExperience';
 import AddEducation from './components/profile-forms/AddEducation';
+import Profiles from './components/profiles/Profiles';
+import Profile from './components/profile/Profile';
 import {Link, Redirect} from 'react-router-dom';
 import { LOGOUT } from './actions/types';
 import './App.css';
@@ -17,6 +19,7 @@ import {Provider} from 'react-redux';
 import store from './store';
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
+
 
 const App = () => {
   useEffect(() => {
@@ -43,10 +46,13 @@ return(
   <Route exact path="/" component={Landing} />
   <Route exact path="/register" component={Register}/>
   <Route exact path="/login" component={Login}/>
+  <Route exact path="/profiles" component={Profiles}/>
   <PrivateRoute exact path="/dashboard" component={Dashboard}/>
   <PrivateRoute exact path="/edit-profile" component={ProfileForm}/>
   <PrivateRoute exact path="/add-experience" component={AddExperience}/>
   <PrivateRoute exact path="/add-education" component={AddEducation}/>
+  <PrivateRoute exact path="/profile/user/:id" component={Profile}/>
+  
   </Switch>
 </Fragment>
 </Router>

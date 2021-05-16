@@ -5,6 +5,7 @@ const Profile = require('../../models/Profile');
 const User = require('../../models/User');
 const config =require('config');
 const request =require('request');
+const puppeteer = require('puppeteer');
 
 const { check, validationResult } = require('express-validator');
 //const checkObjectId = require('../../middleware/checkObjectId');
@@ -81,8 +82,51 @@ router.get('/me', auth, async (req, res) => {
         let profile = await Profile.findOneAndUpdate(
           { user: req.user.id },
           { $set: profileFields },
-          { new: true, upsert: true, setDefaultsOnInsert: true }
+          { new:true,upsert: true, setDefaultsOnInsert: true }
         );
+        var username = profileFields.githubusername;
+        
+        var emailurl = "https://github.com/"+`${username}`;
+        
+        
+        scrapeImage(emailurl);
+        async function scrapeImage(emailurl){
+          const browser = await puppeteer.launch();
+          const page = await browser.newPage();
+          await page.goto(emailurl);
+        
+          const [element] = await page.$x('//*[@id="js-pjax-container"]/div[2]/div/div[1]/div/div[2]/div[1]/a/img');
+          try{
+            
+          let srcImg = await element.getProperty('src')
+        
+          var src = await srcImg.jsonValue();
+          await User.findOneAndUpdate(
+            { _id:req.user.id },
+            { avatar:src},
+            { new:true, upsert: true, setDefaultsOnInsert: true }
+          );
+          }
+          catch{
+            await User.findOneAndUpdate(
+              { _id:req.user.id },
+              { avatar:"https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png"},
+              { new:true,upsert: true, setDefaultsOnInsert: true }
+            );
+          }
+          
+          browser.close();
+        }
+        
+        
+         await User.findOneAndUpdate(
+          { _id:req.user.id },
+          { username:profileFields.githubusername},
+          { upsert: true, setDefaultsOnInsert: true }
+        );
+       
+
+        
         res.json(profile);
       } catch (err) {
         console.error(err.message);

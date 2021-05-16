@@ -18,16 +18,20 @@ const initialState = {
   linkedin: '',
   youtube: '',
   instagram: ''
-};
-const ProfileForm  = ({profile: {profile,loading},createProfile,getCurrentProfile,history}) => {
+}; 
+
+const ProfileForm  = ({profile: {profile,loading},auth:{user},createProfile,getCurrentProfile,history}) => {
+  
     const [formData,setFormData] = useState(initialState);
 
     const [displaySocialInputs, toggleSocialInputs] = useState(false);
     
-
+    
     useEffect(() => {
       if (!profile) getCurrentProfile();
+      
       if (!loading && profile) {
+        
         const profileData = { ...initialState };
         for (const key in profile) {
           if (key in profileData) profileData[key] = profile[key];
@@ -35,12 +39,14 @@ const ProfileForm  = ({profile: {profile,loading},createProfile,getCurrentProfil
         for (const key in profile.social) {
           if (key in profileData) profileData[key] = profile.social[key];
         }
+
         if (Array.isArray(profileData.skills))
           profileData.skills = profileData.skills.join(', ');
           setFormData(profileData);
       }
+      
     }, [loading, getCurrentProfile, profile]);
-  
+    
     
     const {
         company,
@@ -183,14 +189,17 @@ const ProfileForm  = ({profile: {profile,loading},createProfile,getCurrentProfil
     )
 };
 
-ProfileForm .propTypes = {
+ProfileForm.propTypes = {
   createProfile:PropTypes.func.isRequired,
   getCurrentProfile:PropTypes.func.isRequired,
-  profile:PropTypes.object.isRequired
+  profile:PropTypes.object.isRequired,
+  auth:PropTypes.object.isRequired
+  
 };
 
 const mapStateToProps = state =>({
-   profile: state.profile
+   profile: state.profile,
+   auth:state.auth
 })
 
 export default connect(mapStateToProps,{getCurrentProfile,createProfile})

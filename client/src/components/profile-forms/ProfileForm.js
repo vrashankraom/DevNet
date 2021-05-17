@@ -43,6 +43,7 @@ const ProfileForm  = ({profile: {profile,loading},auth:{user},createProfile,getC
         if (Array.isArray(profileData.skills))
           profileData.skills = profileData.skills.join(', ');
           setFormData(profileData);
+          
       }
       
     }, [loading, getCurrentProfile, profile]);

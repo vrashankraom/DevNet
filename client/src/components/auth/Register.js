@@ -14,11 +14,10 @@ const Register = ({register,setAlert,isAuthenticated}) => {
     const[formData,setFormData] = useState({
         name:'',
         email:'',
-        username:'',
         password:'',
         password2:''
     });
-    const {name,email,username,password,password2} =formData; 
+    const {name,email,password,password2} =formData; 
     const onChange = (e) =>setFormData({ ...formData, [e.target.name]: e.target.value });
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -26,7 +25,7 @@ const Register = ({register,setAlert,isAuthenticated}) => {
           //Call setAlert
           setAlert('Passwords do not match', 'danger');
         } else {
-          register({ name, email,username,password });
+          register({ name, email,password });
         }
       };
       if(isAuthenticated){
@@ -44,13 +43,7 @@ const Register = ({register,setAlert,isAuthenticated}) => {
         </div>
         <div className="form-group">
           <input type="email" placeholder="Email Address" name="email" value={email} onChange={e=>onChange(e)} />
-          
         </div>
-        <div className="form-group">
-          <input type="text" placeholder="GitHub username" name="username" value={username} onChange={e=>onChange(e)}/>
-        </div>
-        <small className="form-text"
-            >This site uses GitHub profile image so if you want a profile image, enter GitHub username</small>
         <div className="form-group">
           <input
             type="password"

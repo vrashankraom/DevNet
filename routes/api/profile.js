@@ -6,6 +6,7 @@ const User = require('../../models/User');
 const config =require('config');
 const request =require('request');
 const puppeteer = require('puppeteer');
+const axios = require('axios');
 
 const { check, validationResult } = require('express-validator');
 //const checkObjectId = require('../../middleware/checkObjectId');
@@ -16,6 +17,7 @@ router.get('/me', auth, async (req, res) => {
       const profile = await Profile.findOne({
         user: req.user.id
       }).populate('user', ['name', 'avatar']);
+  
   
       if (!profile) {
         return res.status(400).json({ msg: 'There is no profile for this user' });
@@ -117,15 +119,6 @@ router.get('/me', auth, async (req, res) => {
           
           browser.close();
         }
-        
-        
-         await User.findOneAndUpdate(
-          { _id:req.user.id },
-          { username:profileFields.githubusername},
-          { upsert: true, setDefaultsOnInsert: true }
-        );
-       
-
         
         res.json(profile);
       } catch (err) {
@@ -318,21 +311,19 @@ router.get('/me', auth, async (req, res) => {
 
     router.get('/github/:username', async (req, res) => {
       try {
-        const options={
-         uri: `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&client_id=${config.get('githubClientId')}&${config.get('githubSecret')}`,
-         method: 'GET',
-         headers:{'user-agent':'node.js'}
-      };
-        request(options,(error,response,body)=>{
-           if(error) console.error(error);
-           if(response.statusCode!==200){
-            return res.status(404).json({ msg: 'No Github Profile found!' });
-           }
-           res.json(JSON.parse(body));
-        });
+        const uri = encodeURI(
+          `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc`
+        );
+        const headers = {
+          'user-agent': 'node.js',
+          Authorization: `token ${config.get('githubToken')}`
+        };
+    
+        const gitHubResponse = await axios.get(uri, { headers });
+        return res.json(gitHubResponse.data);
       } catch (err) {
         console.error(err.message);
-        return res.status(500).json({ msg: 'Server Error' });
+        return res.status(404).json({ msg: 'No Github profile found' });
       }
     });
     

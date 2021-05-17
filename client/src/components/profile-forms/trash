@@ -155,3 +155,44 @@
           const srcImg = src.jsonValue();
           console.log(srcImg);
           */
+
+          /*const avatar =gravatar.url(email, {
+          s: '200',
+          r: 'pg',
+          d: 'mm'
+        });
+       */
+      var avatar;
+      if(!username){
+          avatar = "https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png";
+        }
+      else{
+        const url = "https://api.github.com/users/"+`${username}`;
+        
+        UrlExists(url);
+        function UrlExists(url) {
+      var http = new XMLHttpRequest();
+      http.open('HEAD', url, false);
+      http.send();
+      if (http.status == 404){
+      return res
+      .status(400)
+      .json({ errors: [{ msg: 'GitHub User does not exists!' }] });
+      }
+  } 
+  
+        const { JSDOM } = jsdom;
+       const { window } = new JSDOM();
+       const { document } = (new JSDOM('')).window;
+        global.document = document;
+        var $ = jQuery = require('jquery')(window);
+        $.getJSON(url,async function(data){
+          console.log(data);
+          avatar = await data.avatar_url;
+        });
+      }
+      
+
+          //const myusername=username;
+      //const url ="https://www.instagram.com/"+`${myusername}`+"/?__a=1";
+      //avatar = await data.graphql.user.profile_pic_url;

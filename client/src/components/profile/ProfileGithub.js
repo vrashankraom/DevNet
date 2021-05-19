@@ -10,7 +10,7 @@ const ProfileGithub = ({username,getGithubRepos,repos}) => {
     },[getGithubRepos,username])
     return (
         <div>
-            hello
+            hello this is ProfileGithub
         </div>
     )
 }

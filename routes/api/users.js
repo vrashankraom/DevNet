@@ -48,7 +48,7 @@ router.post('/', [
       
       try{
     
-      name=name.toLowerCase();
+      
       user = new User({
         name,
         email,

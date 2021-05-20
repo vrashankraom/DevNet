@@ -1,5 +1,5 @@
 import React, { Fragment,useState } from 'react';
-import {withRouter} from 'react-router-dom';
+import {Link,withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {addEducation} from '../../actions/profile';
@@ -41,14 +41,14 @@ const AddEducation = ({addEducation,history}) => {
       <form class="form" onSubmit={e=>onSubmit(e)}>
         <div class="form-group">
           <input type="text" placeholder="* school or college" name="school" value={school} 
-          onChange={e=>onChange(e)} required />
+          onChange={e=>onChange(e)}  />
         </div>
         <div class="form-group">
           <input type="text" placeholder="* degree" name="degree" value={degree} 
-          onChange={e=>onChange(e)} required />
+          onChange={e=>onChange(e)}  />
         </div>
         <div class="form-group">
-          <input type="text" placeholder="major" 
+          <input type="text" placeholder="field of study(major)" 
           name="fieldofstudy" value={fieldofstudy} 
           onChange={e=>onChange(e)}/>
         </div>
@@ -82,7 +82,7 @@ const AddEducation = ({addEducation,history}) => {
           ></textarea>
         </div>
         <input type="submit" class="btn btn-primary my-1" />
-        <a class="btn btn-light my-1" href="dashboard.html">Go Back</a>
+        <Link class="btn btn-light my-1" to="/dashboard">Go Back</Link>
       </form>
     </section>
     </Fragment>

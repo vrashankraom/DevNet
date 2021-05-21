@@ -204,4 +204,4 @@ const mapStateToProps = state =>({
 })
 
 export default connect(mapStateToProps,{getCurrentProfile,createProfile})
-(withRouter(ProfileForm ));
+(withRouter(ProfileForm));

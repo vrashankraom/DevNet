@@ -6,10 +6,10 @@ import {
   GET_PROFILE,
   PROFILE_ERROR,
   UPDATE_PROFILE,
-  CLEAR_PROFILE,
   ACCOUNT_DELETED,
   GET_PROFILES,
-  GET_REPOS
+  GET_REPOS,
+  CLEAR_PROFILES
 } from './types';
 
 //Get My Profile
@@ -177,7 +177,7 @@ export const deleteAccount = () => async dispatch=>{
         await axios.delete(`/api/profile`);
 
         dispatch({
-            type: CLEAR_PROFILE,
+            type: CLEAR_PROFILES,
         });
         dispatch({
             type: ACCOUNT_DELETED,
@@ -194,7 +194,8 @@ export const deleteAccount = () => async dispatch=>{
 }
 //Get all Profiles
 export const getProfiles = () =>async dispatch =>{
-    
+    //to clear profiles inorder to update them
+    dispatch({ type: CLEAR_PROFILES });
     try {
         const res = await axios.get('/api/profile');
 
@@ -202,9 +203,6 @@ export const getProfiles = () =>async dispatch =>{
             type:GET_PROFILES,
             payload:res.data
         });
-
-        //to clear the data in the profile
-        dispatch({ type: CLEAR_PROFILE });
         
     } catch (err) {
         dispatch({

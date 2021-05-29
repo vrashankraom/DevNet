@@ -1,7 +1,5 @@
 {
     "mongoURI":"mongodb+srv://VrashankRao:vrashank@dev.g1r79.mongodb.net/dev?retryWrites=true&w=majority",
     "jwtSECRET":"devConnectisTheBest",
-    "githubClientId":"fc72ebf5428a31a9d53c",
-    "githubSecret":"dbf795a04b6abe22bc52d87f33fc1ecd7c6c8ea1",
-    "githubToken":"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"
+    "githubToken":"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"
 }

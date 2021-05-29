@@ -132,6 +132,7 @@ img {
   margin: 3rem 0;
 }
 
+
 .btn {
   display: inline-block;
   background: var(--light-color);
@@ -220,9 +221,6 @@ img {
   border: #ccc solid 1px;
 }
 
-.round-img {
-  border-radius: 50%;
-}
 
 .line {
   height: 1px;
@@ -448,6 +446,12 @@ button {
 .profile-github .repo {
   display: flex;
 }
+.profile-github .repo b{
+  color: #2a7a23;
+}
+.profile-github .repo .desc{
+  margin-top: 1%;
+}
 
 .profile-github .repo > div:first-child {
   flex: 7;
@@ -467,20 +471,28 @@ button {
 
 .post {
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
   grid-gap: 2rem;
+}
+.adjust{
+  float: left;
+}
+.post-img {
   align-items: center;
+  margin-bottom: -1%;
+  border: 1px solid rgb(10, 5, 5);
 }
-
-.post > div:first-child {
-  text-align: center;
+.profile-img {
+  border-radius: 50%;
+  width: 55px;
+  border: 2px solid rgb(10, 5, 5);
 }
-
-.post img {
-  width: 150px;
-  margin-top: 10px;
+.post-title{
+  
+  margin-left: 1%;
 }
-
 .post .comment-count {
   background: var(--light-color);
   color: var(--primary-color);
@@ -495,7 +507,9 @@ button {
   margin-bottom: 0.5rem;
 }
 .posttext{
-  margin-bottom: 4%;
+  margin-bottom: 3%;
+  margin-top: -5%;
+  padding-top: 2%;
 }
 
 /* Mobile Styles */
@@ -570,6 +584,10 @@ button {
   .profile-about .skills {
     flex-direction: column;
   }
+  .profile-github .repo .desc{
+    margin-top: 5%;
+    
+  }
 
   .dash-buttons a {
     display: block;
@@ -586,6 +604,6 @@ button {
   }
   .posttext{
     margin-bottom: 5%;
-    margin-top: -10%;
+    margin-top: -8%;
   }
 }

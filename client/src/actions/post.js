@@ -65,7 +65,7 @@ export const removeLike =(id)=>async dispatch =>{
 }
 
 //Add a Post
-export const addPost =(FormData)=>async dispatch =>{
+export const addPost =(text,image)=>async dispatch =>{
     
     const config = {
         headers:{
@@ -73,7 +73,23 @@ export const addPost =(FormData)=>async dispatch =>{
         }
     }
     try{
-        const res = await axios.post(`api/posts/`,FormData,config);
+        
+        const data = new FormData();
+        
+        data.append('file',image);
+        data.append('upload_preset','devnetwork');
+        data.append('cloud_name','devnetwork');
+
+        const response = await fetch('https://api.cloudinary.com/v1_1/devnetwork/image/upload', {
+        method:'POST',
+        body:data
+        });
+        const img_url = await response.json();
+        var url = await img_url.secure_url;
+       
+        const body = JSON.stringify({text,url});
+    
+        const res = await axios.post('api/posts/',body,config);
 
         dispatch({
             type:ADD_POST,
@@ -81,7 +97,7 @@ export const addPost =(FormData)=>async dispatch =>{
         });
   
         dispatch(setAlert('Post Added!', 'success'));
-
+        window.location.reload();
         
     } catch(err){
         dispatch({
@@ -92,7 +108,8 @@ export const addPost =(FormData)=>async dispatch =>{
 }
 //Delete a Post
 export const deletePost =(id)=>async dispatch =>{
-    
+    if(window.confirm('Are you sure? The Post will be deleted!'))
+    {
     try{
         await axios.delete(`api/posts/${id}`);
 
@@ -100,7 +117,7 @@ export const deletePost =(id)=>async dispatch =>{
             type:DELETE_POST,
             payload:id
         });
-
+    
         dispatch(setAlert('Post Removed!', 'success'));
     } catch(err){
         dispatch({
@@ -108,4 +125,5 @@ export const deletePost =(id)=>async dispatch =>{
             payload:{msg:err.response.statusText,status:err.response.status}
         });
     }
+}
 }

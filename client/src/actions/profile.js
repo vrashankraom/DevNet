@@ -14,6 +14,7 @@ import {
 
 //Get My Profile
 export const getCurrentProfile =()=>async dispatch =>{
+    
     try {
         const res = await axios.get('/api/profile/me');
 
@@ -46,7 +47,6 @@ export const createProfile =(formData,history,edit)=>async dispatch=>{
 
         dispatch(setAlert(edit ? 'Profile Updated!':'Profile Created!','success'));
 
-      
         history.push('/dashboard');
     } catch (err) {
         const errors = err.response.data.errors;
@@ -195,7 +195,7 @@ export const deleteAccount = () => async dispatch=>{
 //Get all Profiles
 export const getProfiles = () =>async dispatch =>{
     //to clear profiles inorder to update them
-    dispatch({ type: CLEAR_PROFILES });
+    //dispatch({ type: CLEAR_PROFILES });
     try {
         const res = await axios.get('/api/profile');
 
@@ -203,7 +203,7 @@ export const getProfiles = () =>async dispatch =>{
             type:GET_PROFILES,
             payload:res.data
         });
-        
+       
     } catch (err) {
         dispatch({
             type:PROFILE_ERROR,

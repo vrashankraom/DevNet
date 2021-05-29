@@ -6,6 +6,7 @@ import { Redirect, withRouter } from 'react-router';
 
 const PostForm = ({addPost}) => {
     const [text,setText] = useState("");
+    const [image,setImage] = useState(null);
 
     return (
         <div class="post-form">
@@ -15,17 +16,20 @@ const PostForm = ({addPost}) => {
         <form className="form my-1"
         onSubmit={e=>{
             e.preventDefault();
-            addPost({text});
+            addPost(text,image);
+            setImage(null);
             setText("");
+            
         }}>
           <textarea
             name="text"
             cols="30"
             rows="5"
-            vale={text}
+            value={text}
             onChange={e=>setText(e.target.value)}
             placeholder="Create a post"
           ></textarea>
+          <div><input type="file" accept="image" placeholder="choose a file" name="url" onChange={e=>setImage(e.target.files[0])}/></div>
           <input type="submit" className="btn btn-dark my-1" value="Submit" />
         </form>
       </div>

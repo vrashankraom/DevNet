@@ -1,5 +1,0 @@
-{
-    "mongoURI":"mongodb+srv://VrashankRao:vrashank@dev.g1r79.mongodb.net/dev?retryWrites=true&w=majority",
-    "jwtSECRET":"devConnectisTheBest",
-    "githubToken":"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"
-}

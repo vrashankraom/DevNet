@@ -221,6 +221,15 @@ img {
   border: #ccc solid 1px;
 }
 
+.comment-form{
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.comment-button{
+  margin-top: -8%;
+  margin-left: 92%;
+}
 
 .line {
   height: 1px;
@@ -490,7 +499,7 @@ button {
   border: 2px solid rgb(10, 5, 5);
 }
 .post-title{
-  
+  font-size: large;
   margin-left: 1%;
 }
 .post .comment-count {
@@ -605,5 +614,15 @@ button {
   .posttext{
     margin-bottom: 5%;
     margin-top: -8%;
+  }
+  .comment-button{
+    margin-top: -10%;
+    margin-left: 92%;
+  }
+}
+@media (max-width: 500px) {
+  .comment-button{
+    margin-top: -15%;
+    margin-left: 92%;
   }
 }

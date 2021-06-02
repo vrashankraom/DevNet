@@ -1,24 +1,28 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import Moment from 'react-moment';
 import {connect} from 'react-redux';
 import {addLike,removeLike,deletePost} from '../../actions/post';
 
-const PostItem = ({auth,post:{_id,text,image,name,avatar,user,likes,comments,date},addLike,removeLike,deletePost},profiles) => {
-    return (
+
+const PostItem = ({auth,post:{_id,text,image,name,avatar,user,likes,comments,date},addLike,removeLike,deletePost,showActions}) => (
       <div className="post bg-white p-1 my-1">
       <div>
       <div>
-        <a href="profile.html">
+        <Link to={`/profile/user/${user}`}>
           <img
             className="adjust profile-img"
             src={avatar}
             alt=""
           />
-          </a>
+          </Link>
           </div>
-          <div className="adjust post-title"><b>{name}</b></div>
+          
+          <div className="adjust post-title">
+          <Link to={`/profile/user/${user}`}><b>{name}</b>
+          </Link></div>
+          
          
           {image&&<img
             className="post-img my-1"
@@ -33,7 +37,8 @@ const PostItem = ({auth,post:{_id,text,image,name,avatar,user,likes,comments,dat
          <p className="post-date">
             Posted on <Moment format='DD/MM/YYYY'>{date}</Moment>
         </p>
-        <button onClick={e=>addLike(_id)} type="button" class="btn btn-light">
+        {showActions && (<Fragment>
+          <button onClick={e=>addLike(_id)} type="button" class="btn btn-light">
           <i className="fas fa-thumbs-up"/>&nbsp;{likes.length>0 && (<span className='likes-count'>
           {likes.length}
           </span>)}
@@ -51,10 +56,14 @@ const PostItem = ({auth,post:{_id,text,image,name,avatar,user,likes,comments,dat
             <i className="fas fa-times"></i>
             </button>
         )}
-        
+        </Fragment>)}
       </div>
     </div>
-    );
+  );
+
+
+PostItem.defaultProps={
+  showActions:true
 }
 
 PostItem.propTypes = {

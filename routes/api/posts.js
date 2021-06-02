@@ -162,10 +162,11 @@ router.get('/', auth, async (req, res) => {
         //Get the user and the post
         const user = await User.findById(req.user.id).select('-password');
         const post = await Post.findById(req.params.id);
-  
+        
         //Get the Comment
         const newComment = {
           text: req.body.text,
+          image:req.body.url,
           name: user.name,
           avatar: user.avatar,
           user: req.user.id

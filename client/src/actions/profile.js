@@ -9,7 +9,8 @@ import {
   ACCOUNT_DELETED,
   GET_PROFILES,
   GET_REPOS,
-  CLEAR_PROFILES
+  CLEAR_PROFILES,
+  NO_REPOS
 } from './types';
 
 //Get My Profile
@@ -242,7 +243,7 @@ export const getGithubRepos = (username) =>async dispatch =>{
         })
     } catch (err) {
         dispatch({
-            type:PROFILE_ERROR,
+            type:NO_REPOS,
             payload:{msg:err.response.statusText,status:err.response.status}
         });
     }

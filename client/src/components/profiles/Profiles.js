@@ -9,7 +9,7 @@ import Alert from '../layout/Alert';
 const Profiles = ({getProfiles,profile:{profiles,repos,loading}}) => {
 useEffect(()=>{
     getProfiles();
-},[getProfiles]);
+},[getProfiles,loading]);
     return (
         <Fragment>
             <section className="container">

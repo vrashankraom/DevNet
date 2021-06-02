@@ -501,7 +501,12 @@ button {
 .post-title{
   font-size: large;
   margin-left: 1%;
+  margin-top: -0.5%;
 }
+.post-status{
+  font-size: medium;
+}
+
 .post .comment-count {
   background: var(--light-color);
   color: var(--primary-color);
@@ -613,16 +618,24 @@ button {
   }
   .posttext{
     margin-bottom: 5%;
-    margin-top: -8%;
+    margin-top: -6%;
   }
   .comment-button{
     margin-top: -10%;
     margin-left: 92%;
   }
+  .post-status{
+    font-size: smaller;
+    margin-left: 3%;
+  }
 }
 @media (max-width: 500px) {
   .comment-button{
-    margin-top: -15%;
+    margin-top: -17%;
     margin-left: 92%;
+  }
+  .post-status{
+    font-size: small;
+    margin-left: 3%;
   }
 }

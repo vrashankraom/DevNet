@@ -6,7 +6,7 @@ import Moment from 'react-moment'
 import {deleteComment} from '../../actions/post'
 
 const commentItem = ({postId,
-    comment:{ _id, text, image,name, avatar, user, date },
+    comment:{ _id, text, status,company,image,name, avatar, user, date },
     deleteComment,
     auth}) => {
     return (
@@ -24,7 +24,9 @@ const commentItem = ({postId,
           
           <div className="adjust post-title">
           <Link to={`/profile/user/${user}`}><b>{name}</b>
-          </Link></div>
+          </Link>
+          <div className="post-status">{status}{company && <span> at {company}</span>}</div>
+          </div>
           <div className="adjust comment-button">
               {!auth.loading && user===auth.user._id && (
                 <button onClick={()=>deleteComment(postId, _id)} type="button" className="btn btn-danger">

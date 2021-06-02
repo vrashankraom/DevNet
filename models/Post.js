@@ -15,6 +15,12 @@ const PostSchema = new Schema({
   name: {
     type: String
   },
+  status:{
+    type: String
+  },
+  company:{
+    type: String
+  },
   avatar: {
     type: String
   },
@@ -38,6 +44,12 @@ const PostSchema = new Schema({
         type: String
       },
       name: {
+        type: String
+      },
+      status:{
+        type: String
+      },
+      company:{
         type: String
       },
       avatar: {

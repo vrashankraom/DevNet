@@ -13,12 +13,12 @@ import ProfileGithub from './ProfileGithub';
 const Profile = ({getProfileById, profile:{profile,loading,repos}, auth, match}) => {
     useEffect(() => {
         getProfileById(match.params.id);
-    }, [getProfileById,match.params.id]);
+    }, [getProfileById,match.params.id,loading]);
     return (
         <Fragment>
         <section className="container">
           
-           { profile===null||loading? <Spinner/> : <Fragment>
+           {profile===null||loading? <Spinner/> : <Fragment>
            <Link to="/profiles" className="btn btn-light">
                Back to Profiles
            </Link>

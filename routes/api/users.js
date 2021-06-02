@@ -14,7 +14,6 @@ const jwt = require('jsonwebtoken');
 router.post('/', [
     check('name', 'Name is required').not().isEmpty(),
     check('email', 'Please include a valid email').isEmail(),
-    //check('username', 'Please include your GitHub username').not().isEmpty(),
     check(
       'password',
       'Please enter a password with 6 or more characters'
@@ -29,7 +28,7 @@ router.post('/', [
     console.log(req.body);
     
 
-    const { username, email, password } = req.body;
+    const { email, password } = req.body;
     var {name} = req.body;
     try{
       let user = await User.findOne({ email });
@@ -52,7 +51,6 @@ router.post('/', [
       user = new User({
         name,
         email,
-        avatar,
         password
       });
     

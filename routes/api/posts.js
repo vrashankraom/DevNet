@@ -18,15 +18,16 @@ router.post(
   
       try {
         const user = await User.findById(req.user.id).select('-password');
-        console.log(req.body.url);
-        console.log(req.body.text);
+        
         const newPost = new Post({
           text: req.body.text,
           image:req.body.url,
           name: user.name,
           avatar: user.avatar,
+          status:user.status,
+          company:user.company,
           user: req.user.id
-        });
+          });
   
         const post = await newPost.save();
   
@@ -169,6 +170,8 @@ router.get('/', auth, async (req, res) => {
           image:req.body.url,
           name: user.name,
           avatar: user.avatar,
+          status:user.status,
+          company:user.company,
           user: req.user.id
         };
   

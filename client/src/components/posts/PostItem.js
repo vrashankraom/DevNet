@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {addLike,removeLike,deletePost} from '../../actions/post';
 
 
-const PostItem = ({auth,post:{_id,text,image,name,avatar,user,likes,comments,date},addLike,removeLike,deletePost,showActions}) => (
+const PostItem = ({auth,post:{ _id,text,status,company,image,name,avatar,user,likes,comments,date},addLike,removeLike,deletePost,showActions}) => (
       <div className="post bg-white p-1 my-1">
       <div>
       <div>
@@ -21,9 +21,10 @@ const PostItem = ({auth,post:{_id,text,image,name,avatar,user,likes,comments,dat
           
           <div className="adjust post-title">
           <Link to={`/profile/user/${user}`}><b>{name}</b>
-          </Link></div>
-          
-         
+          </Link>
+          <div className="post-status">{status}{company && <span> at {company}</span>}</div>
+          </div>
+
           {image&&<img
             className="post-img my-1"
             src={image}

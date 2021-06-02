@@ -105,9 +105,10 @@ router.get('/me', auth, async (req, res) => {
           var src = await srcImg.jsonValue();
           await User.findOneAndUpdate(
             { _id:req.user.id },
-            { avatar:src},
+            { avatar:src,status:profileFields.status,company:profileFields.company},
             { new:true, upsert: true, setDefaultsOnInsert: true }
           );
+          
           }
           catch{
             await User.findOneAndUpdate(

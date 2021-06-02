@@ -325,7 +325,6 @@ router.get('/me', auth, async (req, res) => {
         return res.json(gitHubResponse.data);
         
       } catch (err) {
-        console.error(err.message);
         return res.status(404).json({ msg: 'No Github profile found' });
       }
     });

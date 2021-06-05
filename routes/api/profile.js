@@ -89,7 +89,7 @@ router.get('/me', auth, async (req, res) => {
         
         var username="";
         username = profileFields.githubusername;
-        console.log(typeof username==="undefined");
+        //console.log(typeof username==="undefined");
         if(typeof username==="undefined"){
           await User.findOneAndUpdate(
             { _id:req.user.id },

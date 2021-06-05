@@ -222,13 +222,21 @@ img {
 }
 
 .comment-form{
-  max-width: 720px;
+  max-width: 750px;
   margin-left: auto;
   margin-right: auto;
 }
 .comment-button{
   margin-top: -8%;
   margin-left: 92%;
+}
+
+.comments-search{
+  display: grid;
+  max-width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+  grid-gap: 2rem;
 }
 
 .line {
@@ -478,9 +486,16 @@ button {
   padding: 0.5rem;
 }
 
-.post {
+.posts-search{
   display: grid;
-  max-width: 720px;
+  max-width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+  grid-gap: 2rem;
+}
+.post  {
+  display: grid;
+  max-width: 750px;
   margin-left: auto;
   margin-right: auto;
   grid-gap: 2rem;
@@ -501,7 +516,7 @@ button {
 .post-title{
   font-size: large;
   margin-left: 1%;
-  margin-top: -0.5%;
+  
 }
 .post-status{
   font-size: medium;
@@ -628,6 +643,9 @@ button {
     font-size: smaller;
     margin-left: 3%;
   }
+  .post-title{
+    margin-top: -7%;
+  }
 }
 @media (max-width: 500px) {
   .comment-button{
@@ -637,5 +655,8 @@ button {
   .post-status{
     font-size: small;
     margin-left: 3%;
+  }
+  .post-title{
+    margin-top: -10%;
   }
 }

@@ -13,7 +13,6 @@ import Profiles from './components/profiles/Profiles';
 import Profile from './components/profile/Profile';
 import Posts from './components/posts/Posts';
 import Post from './components/post/Post';
-import {Link, Redirect} from 'react-router-dom';
 import { LOGOUT } from './actions/types';
 import './App.css';
 //Redux

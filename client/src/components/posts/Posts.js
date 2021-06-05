@@ -1,4 +1,4 @@
-import React,{Fragment,useEffect} from 'react';
+import React,{Fragment,useEffect,useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {getPosts} from '../../actions/post';
@@ -9,6 +9,8 @@ import Alert from '../layout/Alert';
 import PostForm from './PostForm';
 
 const Posts = ({getProfiles,getPosts,profiles,post:{posts,loading}}) => {
+    const [postsInfo,setPostsInfo] =useState("");
+
     useEffect(() => {
        getPosts();
     }, [getPosts,loading]);
@@ -16,6 +18,12 @@ const Posts = ({getProfiles,getPosts,profiles,post:{posts,loading}}) => {
     useEffect(() => {
         getProfiles();
      }, [getProfiles,loading]);
+
+     const inputEvent = (e) => {
+        e.preventDefault();
+        setPostsInfo(e.target.value)
+        console.log(e.target.value);
+      };
     return (
         loading ? (<Spinner/>):(<Fragment>
             <section className="container">
@@ -25,9 +33,28 @@ const Posts = ({getProfiles,getPosts,profiles,post:{posts,loading}}) => {
                  <i className="fas fa-user"/> Welcome to the Community!
              </p>
              {<PostForm/>}
-             <div className="posts">{posts.map((post) => (
-          <PostItem key={post._id} post={post} profiles={profiles}/>
-        ))}</div>
+             <div className="posts-search">
+             <div className="form form-group">
+             <h1 className="lead">
+                 <i className="fas fa-comment-dots"/> Posts
+             </h1>
+                    <div className="form-group">
+                   <input type="text" placeholder="Filter the posts..." 
+                       name="postInfo" value={postsInfo} onChange={inputEvent}
+                   />
+                   <small className="form-text">
+                   Search for Posts
+                   </small>
+                   </div>
+                   </div>
+                   </div>
+                   {!postsInfo &&<div className="posts">{posts.map((post) => (
+                   <PostItem key={post._id} post={post} profiles={profiles}/>
+                    ))}</div>}
+                    {postsInfo &&<div className="posts">{posts.map((post) => (
+                    post.text.toLowerCase().includes(postsInfo.toLowerCase()) && <PostItem key={post._id} post={post} profiles={profiles}/>
+                    ))}</div>}
+         
             </section>
         </Fragment>)
     )

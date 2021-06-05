@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {setAlert} from './alert';
-import {GET_POSTS,POST_ERROR, UPDATE_LIKES,ADD_POST,DELETE_POST,CLEAR_POSTS,
+import {GET_POSTS,POST_ERROR, UPDATE_LIKES,ADD_POST,DELETE_POST,
     ADD_COMMENT,REMOVE_COMMENT,GET_POST} from './types';
 
 //Get Posts

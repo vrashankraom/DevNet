@@ -1,5 +1,5 @@
 {
     "mongoURI":"Your MongoDB URL here",
     "jwtSECRET":"devConnectisTheBest",
-    "githubToken":"Your GitHub Token here"
+    "github token here"
 }

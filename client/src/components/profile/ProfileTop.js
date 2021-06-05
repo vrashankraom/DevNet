@@ -11,7 +11,7 @@ const ProfileTop = ({profile:{status,company,location,website,social,user:{name,
             alt="Your Profile Pic"
           />
           <h1 class="large">{name}</h1>
-          <p class="lead">{status} {company && <span>Instructor at {company}</span>}</p>
+          <p class="lead">{status} {company && <span> at {company}</span>}</p>
           <p>{location && <span>{location}</span>}</p>
           <div class="icons my-1">
           {

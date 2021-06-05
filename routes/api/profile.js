@@ -88,15 +88,15 @@ router.get('/me', auth, async (req, res) => {
         );
         
         var username="";
-        username = profileFields.githubusername;
+        username = profile.githubusername;
         //console.log(typeof username==="undefined");
-        if(typeof username==="undefined"){
+        if (typeof username==="undefined"){
           await User.findOneAndUpdate(
             { _id:req.user.id },
             { $set :{avatar:"https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png",status:profileFields.status,company:profileFields.company}},
             { new:true,upsert: true, setDefaultsOnInsert: true }
           );
-          return res.json(profile);
+           res.json(profile);
         }
         else {
         var emailurl = "https://github.com/"+`${username}`;
@@ -130,7 +130,7 @@ router.get('/me', auth, async (req, res) => {
             );
           }
         }
-        return res.json(profile);
+         res.json(profile);
         }
       } catch (err) {
         console.error(err.message);

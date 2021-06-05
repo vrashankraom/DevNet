@@ -88,7 +88,7 @@ router.get('/me', auth, async (req, res) => {
         );
         
         var username="";
-        username = profile.githubusername;
+        username = profileFields.githubusername;
         console.log(typeof username==="undefined");
         if(typeof username==="undefined"){
           await User.findOneAndUpdate(
@@ -130,7 +130,7 @@ router.get('/me', auth, async (req, res) => {
             );
           }
         }
-        res.json(profile);
+        return res.json(profile);
         }
       } catch (err) {
         console.error(err.message);

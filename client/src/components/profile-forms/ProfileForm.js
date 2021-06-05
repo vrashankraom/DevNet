@@ -88,8 +88,15 @@ const ProfileForm  = ({profile: {profile,loading},auth:{user},createProfile,getC
             <option value="Junior Developer">Junior Developer</option>
             <option value="Senior Developer">Senior Developer</option>
             <option value="Manager">Manager</option>
-            <option value="Student or Learning">Student</option>
+            <option value="Student">Student</option>
             <option value="Instructor">Instructor</option>
+            <option value="President">President</option>
+            <option value="Vice-President">Vice-President</option>
+            <option value="Chairperson">Chairperson</option>
+            <option value="Vice-Chairperson">Vice-Chairperson</option>
+            <option value="TechLead">TechLead</option>
+            <option value="Designer">Designer</option>
+            <option value="Member">Member</option>
             <option value="Intern">Intern</option>
             <option value="Other">Other</option>
           </select>

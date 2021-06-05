@@ -659,4 +659,7 @@ button {
   .post-title{
     margin-top: -10%;
   }
+  .mobile{
+    display: none;
+  }
 }

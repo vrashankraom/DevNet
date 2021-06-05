@@ -88,13 +88,14 @@ router.get('/me', auth, async (req, res) => {
         );
         
         var username="";
-        username = profile.githubusername;
+        username = profileFields.githubusername;
         //console.log(typeof username==="undefined");
+        console.log(username);
         if (typeof username==="undefined"){
           await User.findOneAndUpdate(
             { _id:req.user.id },
             { $set :{avatar:"https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png",status:profileFields.status,company:profileFields.company}},
-            { new:true,upsert: true, setDefaultsOnInsert: true }
+            { setDefaultsOnInsert: true }
           );
            res.json(profile);
         }
@@ -117,7 +118,7 @@ router.get('/me', auth, async (req, res) => {
           await User.findOneAndUpdate(
             { _id:req.user.id },
             { $set :{avatar:src,status:profileFields.status,company:profileFields.company}},
-            { new:true, upsert: true, setDefaultsOnInsert: true }
+            {  setDefaultsOnInsert: true }
           );
           
           browser.close();

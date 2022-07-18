@@ -100,28 +100,31 @@ router.get('/me', auth, async (req, res) => {
            res.json(profile);
         }
         else {
-        var emailurl = "https://github.com/"+`${username}`;
+        //var emailurl = "https://github.com/"+`${username}`;
         
-        scrapeImage(emailurl);
-        async function scrapeImage(emailurl){
-          const browser = await puppeteer.launch();
-          const page = await browser.newPage();
-          await page.goto(emailurl);
+        scrapeImage(username);
+        async function scrapeImage(username){
+          //const browser = await puppeteer.launch();
+          //const page = await browser.newPage();
+          //await page.goto(emailurl);
         
-          const [element] = await page.$x('//*[@id="js-pjax-container"]/div[2]/div/div[1]/div/div[2]/div[1]/a/img');
+          //const [element] = await page.$x('//*[@id="js-pjax-container"]/div[2]/div/div[1]/div/div[2]/div[1]/a/img');
           try{
             
-          let srcImg = await element.getProperty('src');
+         // let srcImg = await element.getProperty('src');
         
-          var src = await srcImg.jsonValue();
+         // var src = await srcImg.jsonValue();
           
+          let src = await axios.get("https://api.github.com/users/"+`${username}`)
+          src = src.data.avatar_url
+          console.log(src)
           await User.findOneAndUpdate(
             { _id:req.user.id },
             { $set :{avatar:src,status:profileFields.status,company:profileFields.company}},
             {  setDefaultsOnInsert: true }
           );
           
-          browser.close();
+         // browser.close();
           }
           catch{
             await User.findOneAndUpdate(
